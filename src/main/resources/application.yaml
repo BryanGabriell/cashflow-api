@@ -59,6 +59,7 @@ spring:
       on-profile: prod
 
   datasource:
+    # essa url virara dado sensivel em produção
     url: jdbc:postgresql://meubanco:5436/cashflow
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
