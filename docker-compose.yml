@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  meubanco:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - postgres_cashflow:/var/lib/postgresql
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+    ports:
+      - ${PGADMIN_PORT}:80
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - meubanco
+volumes:
+   postgres_cashflow:
+   pgadmin_data:
